@@ -1,11 +1,21 @@
 {
   "name": "getussomecoffeevuejs",
   "version": "0.1.0",
-  "private": true,
+  "description": "practice project for VueJS",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/banjac275/GetUsSomeCoffeeVueJS.git"
+  },
+  "homepage": "https://github.com/banjac275/GetUsSomeCoffeeVueJS#readme",
+  "author": "banji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/banjac275/GetUsSomeCoffeeVueJS/issues"
   },
   "dependencies": {
     "vue": "^2.5.21"
