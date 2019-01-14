@@ -2,23 +2,15 @@
   "name": "getussomecoffeevuejs",
   "version": "0.1.0",
   "description": "practice project for VueJS",
+  "author": "banji",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/banjac275/GetUsSomeCoffeeVueJS.git"
-  },
-  "homepage": "https://github.com/banjac275/GetUsSomeCoffeeVueJS#readme",
-  "author": "banji",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/banjac275/GetUsSomeCoffeeVueJS/issues"
-  },
   "dependencies": {
-    "vue": "^2.5.21"
+    "vue": "^2.5.21",
+    "vuetify": "^1.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
@@ -27,6 +19,19 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.5.21"
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue-cli-plugin-vuetify": "^0.4.6",
+    "vue-template-compiler": "^2.5.21",
+    "vuetify-loader": "^1.0.5"
+  },
+  "bugs": {
+    "url": "https://github.com/banjac275/GetUsSomeCoffeeVueJS/issues"
+  },
+  "homepage": "https://github.com/banjac275/GetUsSomeCoffeeVueJS#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/banjac275/GetUsSomeCoffeeVueJS.git"
   }
 }
