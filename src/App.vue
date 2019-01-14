@@ -14,20 +14,22 @@
         <span class="mr-2">Latest Release</span>
       </v-btn>
     </v-toolbar>
-
     <v-content>
-      <HelloWorld/>
+      <map-container />
+      <v-footer :fixed="fixed" app class="info" dark>
+        <span class="ml-1">&copy; 2019, Nikola Stevanović</span>
+      </v-footer>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import MapContainer from './components/MapContainer'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MapContainer
   },
   data () {
     return {
