@@ -12,7 +12,7 @@ const getters = {
 }
 
 const mutations = {
-  changeCoordinates: (state, { coordinates }) => {
+  changeCoordinates: (state, coordinates) => {
     state.coordinates = coordinates
   }
 }
