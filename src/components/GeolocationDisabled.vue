@@ -1,12 +1,12 @@
 <template>
-  <div class="dimmed-screen" v-show="showDimmed">
+  <div class="dimmed-screen" v-if="showDimmed">
     <v-card class="notification-container">
       <div v-if="geoEnabled" class="loader__parent">
         <div class="loader">Loading...</div>
         <h1>{{geoEnabledText}}</h1>
       </div>
       <div v-else>
-        <h1 v-if="dataUnobtained">{{geoDisabledText}}</h1>
+        <h1 v-if="dataUnobtained">{{unobtainedDataText}}</h1>
         <h1 v-else>{{geoDisabledText}}</h1>
       </div>
     </v-card>

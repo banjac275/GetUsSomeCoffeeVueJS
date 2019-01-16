@@ -12,7 +12,9 @@ export const store = new Vuex.Store({
       //commits location data
       commit('changeCoordinates', data)
 
-      return api.getCoffeeShops(data.lat, data.lon)
+      if (data === undefined) data = {lat: 0, lon: 0}
+
+      return api.getCoffeeShops(data)
       .then(response => {
         let venues = response.response.venues
 
@@ -26,8 +28,7 @@ export const store = new Vuex.Store({
         commit('changeVenuesData', venues)
 
         //takes data and sorts it by proximity
-        /* let tmpList = response.acList
-        tmpList.sort((a, b) => b.Alt - a.Alt) */
+        venues.sort((a, b) => a.location.distance - b.location.distance)
 
         //then returns it through promise
         return Promise.resolve(venues)
@@ -37,6 +38,7 @@ export const store = new Vuex.Store({
   },
   modules: {
     namespaced: true,
-    coordinates
+    coordinates,
+    venuesData
   }
 })

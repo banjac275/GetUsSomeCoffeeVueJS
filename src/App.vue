@@ -17,7 +17,14 @@
         </v-btn>
       </v-toolbar>
       <v-content>
-        <map-container @dataUnobtained="mapUnobtainedData($event)" @showDimmedScreen="mapShowDimmedScreen($event)"/>
+        <v-layout row wrap fill-height>
+          <v-flex xs3>
+            <sidebar-listing />
+          </v-flex>
+          <v-flex xs9>
+            <map-container @dataUnobtained="mapUnobtainedData($event)" @showDimmedScreen="mapShowDimmedScreen($event)" @geoEnabled="mapGeoEnabled($event)"/>
+          </v-flex>
+        </v-layout>      
         <v-footer app class="info" dark>
           <span class="ml-1">&copy; 2019, Nikola Stevanović</span>
         </v-footer>
@@ -29,12 +36,14 @@
 <script>
 import MapContainer from './components/MapContainer'
 import GeolocationDisabled from './components/GeolocationDisabled'
+import SidebarListing from './components/SidebarListing'
 
 export default {
   name: 'App',
   components: {
     MapContainer,
-    GeolocationDisabled
+    GeolocationDisabled,
+    SidebarListing
   },
   data () {
     return {
@@ -46,11 +55,12 @@ export default {
   methods: {
     mapUnobtainedData (val) {
       this.dataUnobtained = val
-      this.geoEnabled = false
     },
     mapShowDimmedScreen (val) {
       this.showDimmed = val
-      this.geoEnabled = true 
+    },
+    mapGeoEnabled (val) {
+      this.geoEnabled = val
     }
   }
 }

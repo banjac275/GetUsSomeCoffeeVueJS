@@ -15,11 +15,13 @@ const DEF_LIMIT = 'limit=10&'
 const VERSION_NUMBER = `v=${new Date().toJSON().slice(0, 10).split('-').join('')}&`
 const CATEGORY_ID_COFFEE_SHOP = 'categoryId=4bf58dd8d48988d1e0931735&'
 const LAT_LON = 'll='
+const PHOTOS_TEMP = 'https://api.myjson.com/bins/7qvp8'
+const PHOTOS_LINK_FULL = PHOTOS + CLIENT_ID_TAG + CLIENT_SECRET_TAG + VERSION_NUMBER + PHOTO_GROUP
 
 
 
 export default {
   get_locations: API_URL + VENUES + SEARCH + CLIENT_ID_TAG + CLIENT_SECRET_TAG + VERSION_NUMBER + BROWSE + DEF_RADIUS + DEF_LIMIT + CATEGORY_ID_COFFEE_SHOP + LAT_LON,
   get_venue_url: API_URL + VENUES,
-  photos_string: PHOTOS + CLIENT_ID_TAG + CLIENT_SECRET_TAG + VERSION_NUMBER + PHOTO_GROUP
+  photos_string: PHOTOS_TEMP
 }
