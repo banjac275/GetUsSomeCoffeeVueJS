@@ -1,5 +1,5 @@
 const state = {
-  venuesData: {}
+  venuesData: []
 }
 
 const getters = {

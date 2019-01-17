@@ -5,8 +5,8 @@ const CLIENT_SECRET = 'D5KF5OSHQSN1425KTQVILFPURTAKPH31TFEDXTHUUAF5ITB0'
 const API_URL = 'https://api.foursquare.com/v2/'
 const VENUES = 'venues/'
 const SEARCH = 'search?'
-const PHOTOS = '/photos?'
-const PHOTO_GROUP = 'group=venue'
+//const PHOTOS = '/photos?'
+//const PHOTO_GROUP = 'group=venue'
 const CLIENT_ID_TAG = `client_id=${CLIENT_ID}&`
 const CLIENT_SECRET_TAG = `client_secret=${CLIENT_SECRET}&`
 const BROWSE = 'intent=browse&'
@@ -16,7 +16,7 @@ const VERSION_NUMBER = `v=${new Date().toJSON().slice(0, 10).split('-').join('')
 const CATEGORY_ID_COFFEE_SHOP = 'categoryId=4bf58dd8d48988d1e0931735&'
 const LAT_LON = 'll='
 const PHOTOS_TEMP = 'https://api.myjson.com/bins/7qvp8'
-const PHOTOS_LINK_FULL = PHOTOS + CLIENT_ID_TAG + CLIENT_SECRET_TAG + VERSION_NUMBER + PHOTO_GROUP
+//const PHOTOS_LINK_FULL = PHOTOS + CLIENT_ID_TAG + CLIENT_SECRET_TAG + VERSION_NUMBER + PHOTO_GROUP
 
 
 

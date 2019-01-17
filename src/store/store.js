@@ -18,20 +18,33 @@ export const store = new Vuex.Store({
       .then(response => {
         let venues = response.response.venues
 
-        venues.map(venue => {
-          api.getVenuePhotos(venue.id)
-          .then(photoList => venue.photos = photoList.response.photos.items)
-          .catch(err => venue.photos = [])
-        })
+        //because of promise this is done with iteration for i and not with other stuff
+        function recursiveGetPhotos (i) {
+          if (i === venues.length) {
+            //commits venues data
+            commit('changeVenuesData', venues)
 
-        //commits venues data
-        commit('changeVenuesData', venues)
+            //takes data and sorts it by proximity
+            venues.sort((a, b) => a.location.distance - b.location.distance)
 
-        //takes data and sorts it by proximity
-        venues.sort((a, b) => a.location.distance - b.location.distance)
+            //then returns it through promise
+            return venues
+          } else {
+            api.getVenuePhotos(venues[i].id)
+            .then(photoList => {
+              venues[i].photos = photoList.response.photos.items
+              return recursiveGetPhotos(++i)
+            })
+            .catch(err => {
+              console.log(err)
+              venues[i].photos = []
+            })
+          }
+        }
 
-        //then returns it through promise
-        return Promise.resolve(venues)
+        let i = 0
+
+        return Promise.resolve(recursiveGetPhotos(i))
       })
       .catch((err) => Promise.reject(err))
     }
