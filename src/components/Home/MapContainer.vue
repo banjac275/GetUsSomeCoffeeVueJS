@@ -18,7 +18,10 @@ export default {
   },
   methods: {
     ...mapActions([
-      'retLocationData'
+      'retLocationData',
+      'setGeoEnabled',
+      'setDataUnobtained',
+      'setShowDimmed'
     ]),
     obtainLocationAndData () {
       if (navigator.geolocation) {
@@ -29,7 +32,7 @@ export default {
           this.retLocationData({lat: latitude, lon: longitude})
           .then(data => {
 
-            this.initMap({lat: latitude, lon: longitude})
+            this.initMap({lat: latitude, lon: longitude}, data)
 
             //when data returns, in a minute, the function is re-run and data refreshed
             setTimeout(() => this.obtainLocationAndData(), 60000)
@@ -38,25 +41,25 @@ export default {
             console.log(err)
 
             //show message about unobtained data
-            this.$emit('dataUnobtained', true)
-            this.$emit('geoEnabled', false)
-            this.$emit('showDimmedScreen', true)
+            this.setDataUnobtained(true)
+            this.setGeoEnabled(false)
+            this.setShowDimmed(true)
           })
         }, (error) => {
           console.log(error)
           
           //geolocation show message
-          this.$emit('dataUnobtained', false)
-          this.$emit('geoEnabled', false)
-          this.$emit('showDimmedScreen', true)
+          this.setDataUnobtained(false)
+          this.setGeoEnabled(false)
+          this.setShowDimmed(true)
         })
       } else {
-        this.$emit('dataUnobtained', false)
-        this.$emit('geoEnabled', false)
-        this.$emit('showDimmedScreen', true)
+        this.setDataUnobtained(false)
+        this.setGeoEnabled(false)
+        this.setShowDimmed(true)
       }
     },
-    initMap(myPosition) {
+    initMap(myPosition, mapData) {
       let pos = {lat: myPosition.lat, lng: myPosition.lon};
 
       this.map = new google.maps.Map(document.getElementById('map'), {zoom: 15.5, center: pos});
@@ -74,22 +77,24 @@ export default {
         radius: 1000
       })
 
-      this.markerList = []
-
       console.log(this.getVenuesData)
 
+      this.drawMarkers()
+    },
+    drawMarkers () {
+      this.markerList = []
 
       this.getVenuesData.forEach((el, ind) => {
         let tempJSON = {}
 
         //creates marker on map
-        tempJSON.marker = new google.maps.Marker({position: {lat: el.location.lat, lng: el.location.lng}, map: this.map})
+        tempJSON.marker = new google.maps.Marker({position: {lat: el.venue.location.lat, lng: el.venue.location.lng}, map: this.map})
 
         //infoWindow content
         let contentString = 
         `<div>
-          <div>${el.name}</div>
-          <div>${el.location.distance} m away</div>
+          <div>${el.venue.name}</div>
+          <div>${el.venue.location.distance} m away</div>
         </div>`
 
         //creates infoWindow object
@@ -99,10 +104,10 @@ export default {
 
         this.markerList.push(tempJSON)
       })
-
-      this.$emit('dataUnobtained', true)
-      this.$emit('geoEnabled', false)
-      this.$emit('showDimmedScreen', false)
+      
+      this.setDataUnobtained(true)
+      this.setGeoEnabled(false)
+      this.setShowDimmed(false)
     }
   },
   computed: {
@@ -111,32 +116,11 @@ export default {
     ])
   },
   watch: {
-    getVenuesData (oldVal, val) {
+    /* getVenuesData (oldVal, val) {
       if (oldVal !== val) {
-        this.markerList = []
-
-        this.getVenuesData.forEach((el, ind) => {
-          let tempJSON = {}
-
-          //creates marker on map
-          tempJSON.marker = new google.maps.Marker({position: {lat: el.location.lat, lng: el.location.lng}, map: this.map})
-
-          //infoWindow content
-          let contentString = 
-          `<div>
-            <div>${el.name}</div>
-            <div>${el.location.distance} m away</div>
-          </div>`
-
-          //creates infoWindow object
-          tempJSON.infoWindow = new google.maps.InfoWindow({
-            content: contentString
-          })
-
-          this.markerList.push(tempJSON)
-        })
+        this.drawMarkers()
       }
-    },
+    }, */
     showInfoMarkerId (val) {
       if (val !== null) {
         this.markerList[val].infoWindow.open(this.map, this.markerList[val].marker)

@@ -8,9 +8,6 @@
     </v-flex>
     <v-flex xs9>
       <map-container 
-        @dataUnobtained="mapUnobtainedData($event)" 
-        @showDimmedScreen="mapShowDimmedScreen($event)" 
-        @geoEnabled="mapGeoEnabled($event)"
         :showInfoMarkerId='hoveredCardId'
         :hideInfoMarkerId='notHoveredCardId'
       />
@@ -35,23 +32,13 @@ export default {
     }
   },
   methods: {
-    mapUnobtainedData (val) {
-      this.$emit('homeUnobtainedData', val)
-    },
-    mapShowDimmedScreen (val) {
-      this.$emit('homeShowDimmedScreen', val)
-    },
-    mapGeoEnabled (val) {
-      this.$emit('homeGeoEnabled', val)
-    },
     handleHoveredCard (id) {
       this.hoveredCardId = id
     },
     handleNotHoveredCard (id) {
       this.notHoveredCardId = id
     }
-  }
-  
+  } 
 }
 </script>
 

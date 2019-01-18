@@ -14,13 +14,35 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex' 
+
 export default {
-  props: ['geoEnabled', 'dataUnobtained', 'showDimmed'],
   data () {
     return {
       geoDisabledText: 'Please enable geolocation!',
       geoEnabledText: 'Please wait...',
-      unobtainedDataText: 'You exceeded maximum request per day, please try tomorrow.'
+      unobtainedDataText: 'You exceeded maximum request per day, please try tomorrow.',
+      showDimmed: true,
+      geoEnabled: true,
+      dataUnobtained: false
+    }
+  },
+  computed: {
+    ...mapGetters ([
+      'getDataUnobtained',
+      'getGeoEnabled',
+      'getShowDimmed'
+    ])
+  },
+  watch: {
+    getDataUnobtained (val) {
+      this.dataUnobtained = val
+    },
+    getGeoEnabled (val) {
+      this.geoEnabled = val
+    },
+    getShowDimmed (val) {
+      this.showDimmed = val
     }
   }
 }

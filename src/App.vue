@@ -1,6 +1,6 @@
 <template>
   <div class="content-wrapper">
-    <geolocation-disabled :geoEnabled='geoEnabled' :showDimmed='showDimmed' :dataUnobtained='dataUnobtained' />
+    <geolocation-disabled />
     <v-app>
       <v-toolbar app>
         <v-toolbar-title class="headline text-uppercase">
@@ -8,11 +8,7 @@
         </v-toolbar-title>
       </v-toolbar>
       <v-content>
-        <home 
-          @mapUnobtainedData="homeUnobtainedData($event)"
-          @mapShowDimmedScreen="homeShowDimmedScreen($event)"
-          @mapGeoEnabled="homeGeoEnabled($event)"
-        />
+        <router-view />
         <v-footer app class="info" dark>
           <span class="ml-1">&copy; 2019, Nikola Stevanović</span>
         </v-footer>
@@ -23,31 +19,11 @@
 
 <script>
 import GeolocationDisabled from './components/GeolocationDisabled'
-import Home from './components/Home/Home'
 
 export default {
   name: 'App',
   components: {
-    GeolocationDisabled,
-    Home
-  },
-  data () {
-    return {
-      geoEnabled: true,
-      dataUnobtained: false,
-      showDimmed: true
-    }
-  },
-  methods: {
-    mapUnobtainedData (val) {
-      this.dataUnobtained = val
-    },
-    mapShowDimmedScreen (val) {
-      this.showDimmed = val
-    },
-    mapGeoEnabled (val) {
-      this.geoEnabled = val
-    }
+    GeolocationDisabled
   }
 }
 </script>

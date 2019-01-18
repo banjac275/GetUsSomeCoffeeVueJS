@@ -7,27 +7,28 @@
         <v-flex xs4 text-xs-center><p>Distance</p></v-flex>
       </v-layout>
     </v-card>
-    <v-card v-for="(item, index) in getVenuesData" :key="index" 
+    <v-card v-for="(item, index) in venueDataTemp" :key="index" 
       class="coffee-place-card" 
       @mouseenter="showInfoWindow(index)" 
       @mouseleave="hideInfoWindow(index)"
+      @click="displayVenueInfo(index)"
     >
       <v-layout row wrap justify-center align-center fill-height>
-        <v-flex xs4><v-img :src="item.photos[0].prefix+'30x30'+item.photos[0].suffix" class="coffee-place-card--image" /></v-flex>
-        <v-flex xs4 text-xs-center><p>{{item.name}}</p></v-flex>
-        <v-flex xs4 text-xs-center><p>{{item.location.distance}} m</p></v-flex>
+        <v-flex xs4><v-img :src="item.venue.photos.groups[0].prefix+'30x30'+item.venue.photos.groups[0].suffix" class="coffee-place-card--image" /></v-flex>
+        <v-flex xs4 text-xs-center><p>{{item.venue.name}}</p></v-flex>
+        <v-flex xs4 text-xs-center><p>{{item.venue.location.distance}} m</p></v-flex>
       </v-layout>
     </v-card>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
     return {
-
+      venueDataTemp: []
     }
   },
   computed: {
@@ -36,12 +37,32 @@ export default {
     ])
   },
   methods: {
+    ...mapActions([
+      'retPhotosAlt'
+    ]),
     showInfoWindow (id) {
       this.$emit('cardHovered', id)
     },
     hideInfoWindow (id) {
       this.$emit('cardNotHovered', id)
+    },
+    displayVenueInfo (val) {
+      sessionStorage.setItem('arrayPosition', val)
+      this.$router.push('/venueDisplay')
     }
+  },
+  beforeMount () {
+    this.venueDataTemp = this.getVenuesData
+
+    this.retPhotosAlt()
+    .then(photos => {
+      this.venueDataTemp.forEach(el => {
+        if (el.venue.photos.count === 0) el.venue.photos.groups = photos
+      })
+
+      
+    })
+    .catch(err => console.log(err))
   }
 }
 </script>
