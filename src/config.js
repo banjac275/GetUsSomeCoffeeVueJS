@@ -23,5 +23,6 @@ const PHOTOS_TEMP = 'https://api.myjson.com/bins/7qvp8'
 export default {
   get_locations: API_URL + VENUES + EXPLORE + CLIENT_ID_TAG + CLIENT_SECRET_TAG + VERSION_NUMBER + SORT_BY_DISTANCE + DEF_RADIUS + DEF_LIMIT + SECTION + LAT_LON,
   get_venue_url: API_URL + VENUES,
+  secret_keys: CLIENT_ID_TAG + CLIENT_SECRET_TAG + VERSION_NUMBER,
   photos_string: PHOTOS_TEMP
 }

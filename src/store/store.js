@@ -28,10 +28,18 @@ export const store = new Vuex.Store({
       })
       .catch((err) => Promise.reject(err))
     },
-    retPhotosAlt({ commit }) {
+    retPhotosAlt ({ commit }) {
       return api.getVenuePhotos()
       .then(photos => Promise.resolve(photos))
       .catch(err => Promise.reject(err))
+    },
+    retMoreInfoAboutLocation ({ commit }, id) {
+      return api.getVenueInfoMore(id)
+      .then(data => Promise.resolve(data.response.venue))
+      .catch(err => Promise.reject(err))
+    },
+    setChangedData ({ commit }, data) {
+      commit('changeVenuesData', data)
     },
     setGeoEnabled ({ commit }, data) {
       commit('changeGeoEnabled', data)

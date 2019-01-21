@@ -1,12 +1,12 @@
 <template>
   <v-layout row wrap fill-height>
-    <v-flex xs3>
-      <sidebar-listing 
+    <v-flex xs3 class="sidebar-parent">
+      <sidebar-listing
         @cardHovered="handleHoveredCard($event)"
         @cardNotHovered="handleNotHoveredCard($event)"
       />
     </v-flex>
-    <v-flex xs9>
+    <v-flex xs9 class="maps-parent">
       <map-container 
         :showInfoMarkerId='hoveredCardId'
         :hideInfoMarkerId='notHoveredCardId'
@@ -38,10 +38,19 @@ export default {
     handleNotHoveredCard (id) {
       this.notHoveredCardId = id
     }
-  } 
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+@media screen and (max-width: 1024px) {
+  .sidebar-parent {
+    max-width: 0;
+    overflow: hidden;
+  }
 
+  .maps-parent {
+    min-width: 100% !important;
+  }
+}
 </style>

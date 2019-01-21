@@ -6,5 +6,8 @@ export default {
   },
   getVenuePhotos () {
     return fetch(config.photos_string).then(response => response.json())
+  },
+  getVenueInfoMore (id) {
+    return fetch(config.get_venue_url + id + '?' + config.secret_keys).then(response => response.json())
   }
 }

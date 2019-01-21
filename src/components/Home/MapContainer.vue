@@ -43,7 +43,7 @@ export default {
             //show message about unobtained data
             this.setDataUnobtained(true)
             this.setGeoEnabled(false)
-            this.setShowDimmed(true)
+            if (this.$route.path === '/') this.setShowDimmed(true)
           })
         }, (error) => {
           console.log(error)
@@ -116,11 +116,9 @@ export default {
     ])
   },
   watch: {
-    /* getVenuesData (oldVal, val) {
-      if (oldVal !== val) {
-        this.drawMarkers()
-      }
-    }, */
+    $route (to, from) {
+      console.log(to, from)
+    },
     showInfoMarkerId (val) {
       if (val !== null) {
         this.markerList[val].infoWindow.open(this.map, this.markerList[val].marker)
