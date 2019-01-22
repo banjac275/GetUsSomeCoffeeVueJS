@@ -6,6 +6,7 @@ import venuesData from './modules/venuesData'
 import dataUnobtained from './modules/dataUnobtained'
 import geoEnabled from './modules/geoEnabled'
 import showDimmed from './modules/showDimmed'
+import sidebarHidden from './modules/sidebarHidden'
 
 Vue.use(Vuex)
 
@@ -49,6 +50,9 @@ export const store = new Vuex.Store({
     },
     setShowDimmed ({ commit }, data) {
       commit('changeShowDimmed', data)
+    },
+    setSidebarHidden ({ commit }, data) {
+      commit('changeSidebarHidden', data)
     }
   },
   modules: {
@@ -57,6 +61,7 @@ export const store = new Vuex.Store({
     venuesData,
     dataUnobtained,
     showDimmed,
-    geoEnabled
+    geoEnabled,
+    sidebarHidden
   }
 })

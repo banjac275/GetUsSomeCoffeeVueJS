@@ -76,7 +76,7 @@ export default {
       this.photosCheck(val)
     }
   },
-  beforeMount () {
+  created () {
     this.photosCheck(this.getVenuesData)
   }
 }
@@ -100,6 +100,12 @@ export default {
 }
 
 .coffee-place-card--image {
-  max-height: 80px;
+  max-height: 70px;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .coffee-place-card {
+    min-width: 290px !important;
+  }
 }
 </style>

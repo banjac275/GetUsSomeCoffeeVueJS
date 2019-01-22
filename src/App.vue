@@ -3,7 +3,7 @@
     <geolocation-disabled />
     <v-app>
       <v-toolbar app>
-        <v-toolbar-title class="headline text-uppercase">
+        <v-toolbar-title class="headline text-uppercase" @click="showSidebar()">
           <span>GET US SOME COFFEE Vue JS</span>
         </v-toolbar-title>
       </v-toolbar>
@@ -18,12 +18,27 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import GeolocationDisabled from './components/GeolocationDisabled'
 
 export default {
   name: 'App',
   components: {
     GeolocationDisabled
+  },
+  data() {
+    return {
+      sidebarShown: true
+    }
+  },
+  methods: {
+    ...mapActions([
+      'setSidebarHidden'
+    ]),
+    showSidebar () {
+      (screen.width < 1024) ? this.sidebarShown = !this.sidebarShown : this.sidebarShown = true
+      this.setSidebarHidden(this.sidebarShown)
+    }
   }
 }
 </script>
